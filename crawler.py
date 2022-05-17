@@ -36,7 +36,7 @@ def yahoo(item):
         product = {}
         product['網址'] = link
         product['商品名稱'] = soup2.find('h1', class_='HeroInfo__title___57Yfg HeroInfo__textTooLong___BXk8j').text
-        product['價格'] = soup2.find('div', class_='HeroInfo__mainPrice___1xP9H').text
+        product['價格'] = soup2.find('div', class_='HeroInfo__mainPrice___1xP9H').text.replace('$','')
         product['圖片'] = soup2.find('img', class_='LensImage__img___3khRA')['src']
         products.append(product)
     # print(products, len(products))
@@ -92,7 +92,7 @@ def momo(item):
         product['商品名稱'] = i.find('h3',class_="prdName").text
         # print(i.find('h3',class_="prdName").text)
         # 價格
-        product['價格'] = i.find('span',class_="price").text
+        product['價格'] = i.find('span',class_="price").text.replace('$','')
         # print(i.find('span',class_="price").text)
         # 圖片
         product['圖片'] = i.find('img', class_="prdImg lazy lazy-loaded")['src']
@@ -122,7 +122,7 @@ def pchome(item):
         product = {}
         product['網址'] = 'https://24h.pchome.com.tw/prod/' + i['Id']
         product['商品名稱'] = i['name']
-        product['價格'] = i['price']
+        product['價格'] =  '{:,}'.format(i['price'])
         product['圖片'] = 'https://b.ecimg.tw' + i['picS']
         products.append(product)
     # print(products, len(products))
